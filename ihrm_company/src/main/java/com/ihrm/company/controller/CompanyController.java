@@ -14,6 +14,7 @@ import java.util.List;
  * @Author WenYingFei
  * @Date 2020/06/10
  **/
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/company")
 public class CompanyController {
@@ -27,7 +28,7 @@ public class CompanyController {
         return new Result(ResultCode.SUCCESS);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     public Result update(@PathVariable("id") String id, @RequestBody Company company){
         company.setId(id);
         companyService.update(company);
