@@ -36,6 +36,13 @@ public class UserService {
     @Autowired
     private IdWorker idWorker;
 
+    /**
+     * 根据mobile查询用户
+     */
+    public User findByMobile(String mobile){
+        return userDao.findByMobile(mobile);
+    }
+
     public void save(User user){
         //设置主键
         String id = idWorker.nextId() + "";
