@@ -23,7 +23,17 @@ spring:
     database: MySQL
     show-sql: true
     open-in-view: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
 jwt:
   config:
     key: saas-ihrm
     ttl: 36000000
+my:
+  appId: 20644799
+  apiKey: 6T0AbkW3xDTa0zn8VZazjtId
+  secretKey: Zo4K2hm1Q2iDwTlyyxQuxQlHU4VYVlSO
+  imageType: BASE64
+  groupId: itcast
+  url: http://localhost:8080/#/facelogin
