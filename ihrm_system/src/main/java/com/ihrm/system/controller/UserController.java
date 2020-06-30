@@ -5,6 +5,7 @@ import com.ihrm.common.entity.PageResult;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
 import com.ihrm.common.exception.CommonException;
+import com.ihrm.common.poi.ExcelImportUtil;
 import com.ihrm.common.utils.JwtUtil;
 import com.ihrm.domain.system.User;
 import com.ihrm.domain.system.response.ProfileResult;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -65,6 +67,17 @@ public class UserController extends BaseController {
         //调用service完成保存用户
         userService.save(user);
         //构造返回结果
+        return new Result(ResultCode.SUCCESS);
+    }
+
+    /**
+     * 导入Excel,添加用户
+     */
+    @RequestMapping(value = "/user/import" , method = RequestMethod.POST)
+    public Result importUser(@RequestParam(name = "file") MultipartFile file) throws Exception {
+        List<User> list = new ExcelImportUtil(User.class).readExcel(file.getInputStream(), 1, 1);
+        //3.批量保存用户
+        userService.saveAll(list , companyId , companyName);
         return new Result(ResultCode.SUCCESS);
     }
 
